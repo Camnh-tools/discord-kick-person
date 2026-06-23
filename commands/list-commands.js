@@ -1,7 +1,7 @@
-const { commands } = require("configs");
+const { commands } = require("../config");
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
-module.exports = new SlashCommandBuilder()
+const kickWithsRoleScb = new SlashCommandBuilder()
   .setName(commands.KICK_ROLE)
   .setDescription("Kick tất cả member có role được chọn")
   .addRoleOption((option) =>
@@ -13,5 +13,7 @@ module.exports = new SlashCommandBuilder()
   .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers);
 
 const kickNoRoleScb = new SlashCommandBuilder()
-  .setName(commands)
+  .setName(commands.KICK_NO_ROLE)
   .setDescription("Kick person without role");
+
+module.exports = [kickNoRoleScb, kickWithsRoleScb]

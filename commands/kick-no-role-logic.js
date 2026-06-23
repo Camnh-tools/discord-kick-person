@@ -61,5 +61,4 @@ async function kickNoRole(interaction) {
 
 module.exports = {
   kickNoRole,
-  kickNoRoleScb,
 };

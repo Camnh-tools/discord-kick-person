@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits, SlashCommandBuilder } = require('discord.js');
-const scb = require('./commands');
+const {switchInteractionCommand} = require('./commands')
+const scb = require('./commands/list-commands');
 
 const client = new Client({
     intents: [
@@ -13,7 +14,7 @@ const client = new Client({
 
 client.on('ready', async () => {
   // Register slash commands when bot starts up
-  const commands  = scb.scbCommands.map(command => command.toJSON());
+  const commands  = scb.map(command => command.toJSON());
 
   // Register the commands with Discord's API
   await client.application.commands.set(commands);
@@ -24,7 +25,7 @@ client.on('ready', async () => {
 client.on('interactionCreate', async (interaction) => {
   if (!interaction.isCommand()) return;
 
-  scb.switchInteractionCommand(interaction)
+  switchInteractionCommand(interaction)
 });
 
 // Use an environment variable or keep this private!
